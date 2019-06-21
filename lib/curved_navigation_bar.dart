@@ -4,7 +4,7 @@ import 'src/nav_button.dart';
 import 'src/nav_custom_painter.dart';
 
 class CurvedNavigationBar extends StatefulWidget {
-  final List<Widget> items;
+  final List<IconData> items;
   final int index;
   final Color color;
   final Color buttonBackgroundColor;
@@ -13,6 +13,8 @@ class CurvedNavigationBar extends StatefulWidget {
   final Curve animationCurve;
   final Duration animationDuration;
   final double height;
+  final Color activeColor;
+  final Color inactiveColor;
 
   CurvedNavigationBar({
     Key key,
@@ -25,6 +27,8 @@ class CurvedNavigationBar extends StatefulWidget {
     this.animationCurve = Curves.easeOut,
     this.animationDuration = const Duration(milliseconds: 600),
     this.height = 75.0,
+    this.activeColor,
+    this.inactiveColor,
   })  : assert(items != null),
         assert(items.length >= 1),
         assert(0 <= index && index < items.length),
@@ -41,7 +45,7 @@ class _CurvedNavigationBarState extends State<CurvedNavigationBar>
   int _endingIndex = 0;
   double _pos;
   double _buttonHide = 0;
-  Widget _icon;
+  IconData _icon;
   AnimationController _animationController;
   int _length;
 
@@ -115,7 +119,7 @@ class _CurvedNavigationBarState extends State<CurvedNavigationBar>
                   type: MaterialType.circle,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: _icon,
+                    child: Icon(_icon, color: widget.activeColor,),
                   ),
                 ),
               ),
@@ -146,7 +150,7 @@ class _CurvedNavigationBarState extends State<CurvedNavigationBar>
                     position: _pos,
                     length: _length,
                     index: widget.items.indexOf(item),
-                    child: item,
+                    child: Icon(item, color: widget.inactiveColor,)
                   );
                 }).toList())),
           ),
