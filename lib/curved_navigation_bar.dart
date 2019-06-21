@@ -4,7 +4,7 @@ import 'src/nav_button.dart';
 import 'src/nav_custom_painter.dart';
 
 class CurvedNavigationBar extends StatefulWidget {
-  final List<IconData> items;
+  final List<TabData> items;
   final int index;
   final Color color;
   final Color buttonBackgroundColor;
@@ -48,11 +48,13 @@ class _CurvedNavigationBarState extends State<CurvedNavigationBar>
   IconData _icon;
   AnimationController _animationController;
   int _length;
+  int _badge = 0;
 
   @override
   void initState() {
     super.initState();
-    _icon = widget.items[widget.index];
+    _icon = widget.items[widget.index].iconData;
+    _badge = widget.items[widget.index].badge;
     _length = widget.items.length;
     _pos = widget.index / _length;
     _startingPos = widget.index / _length;
@@ -63,7 +65,7 @@ class _CurvedNavigationBarState extends State<CurvedNavigationBar>
         final endingPos = _endingIndex / widget.items.length;
         final middle = (endingPos + _startingPos) / 2;
         if ((endingPos - _pos).abs() < (_startingPos - _pos).abs()) {
-          _icon = widget.items[_endingIndex];
+          _icon = widget.items[_endingIndex].iconData;
         }
         _buttonHide =
             (1 - ((middle - _pos) / (_startingPos - middle)).abs()).abs();
@@ -119,7 +121,38 @@ class _CurvedNavigationBarState extends State<CurvedNavigationBar>
                   type: MaterialType.circle,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Icon(_icon, color: widget.activeColor,),
+                    //child: Icon(_icon, color: widget.activeColor,),
+                    child: new Stack(
+                      alignment: Alignment.topRight,
+                      children: <Widget>[
+                        new Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            new Icon(_icon, color: widget.activeColor),
+                          ],
+                        ),
+                        _badge>0?new Positioned(
+                          right: 10,
+                          top: 10,
+                          child: new Container(
+                            padding: EdgeInsets.all(2),
+                            decoration: new BoxDecoration(
+                              color: widget.buttonBackgroundColor,
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            constraints: BoxConstraints(minWidth: 14, minHeight: 14,),
+                            child: Text(
+                              _badge.toString(),
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 8,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ):new Container(),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -150,7 +183,7 @@ class _CurvedNavigationBarState extends State<CurvedNavigationBar>
                     position: _pos,
                     length: _length,
                     index: widget.items.indexOf(item),
-                    child: Icon(item, color: widget.inactiveColor,)
+                    child: Icon(item.iconData, color: widget.inactiveColor,)
                   );
                 }).toList())),
           ),
@@ -171,4 +204,14 @@ class _CurvedNavigationBarState extends State<CurvedNavigationBar>
           duration: widget.animationDuration, curve: widget.animationCurve);
     });
   }
+}
+
+class TabData {
+  TabData({@required this.iconData, @required this.title, this.onclick, @required this.badge});
+
+  IconData iconData;
+  String title;
+  Function onclick;
+  int badge;
+  final UniqueKey key = UniqueKey();
 }
