@@ -29,6 +29,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.14.11"
+  cupertino_icons:
+    dependency: "direct main"
+    description:
+      name: cupertino_icons
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.2"
+  curved_navigation_bar:
+    dependency: "direct main"
+    description:
+      path: ".."
+      relative: true
+    source: path
+    version: "0.2.20"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -47,7 +61,7 @@ packages:
     source: hosted
     version: "0.12.5"
   meta:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: meta
       url: "https://pub.dartlang.org"

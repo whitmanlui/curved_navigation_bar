@@ -66,6 +66,7 @@ class _CurvedNavigationBarState extends State<CurvedNavigationBar>
         final middle = (endingPos + _startingPos) / 2;
         if ((endingPos - _pos).abs() < (_startingPos - _pos).abs()) {
           _icon = widget.items[_endingIndex].iconData;
+          _badge = widget.items[_endingIndex].badge;
         }
         _buttonHide =
             (1 - ((middle - _pos) / (_startingPos - middle)).abs()).abs();
@@ -123,7 +124,7 @@ class _CurvedNavigationBarState extends State<CurvedNavigationBar>
                     padding: const EdgeInsets.all(8.0),
                     //child: Icon(_icon, color: widget.activeColor,),
                     child: new Stack(
-                      alignment: Alignment.topRight,
+                      alignment: Alignment.bottomCenter,
                       children: <Widget>[
                         new Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -132,23 +133,31 @@ class _CurvedNavigationBarState extends State<CurvedNavigationBar>
                           ],
                         ),
                         _badge>0?new Positioned(
-                          right: 10,
-                          top: 10,
+                          right: -3,
+                          top: -3,
                           child: new Container(
-                            padding: EdgeInsets.all(2),
+                            padding: EdgeInsets.all(1),
                             decoration: new BoxDecoration(
                               color: widget.buttonBackgroundColor,
                               borderRadius: BorderRadius.circular(6),
                             ),
                             constraints: BoxConstraints(minWidth: 14, minHeight: 14,),
-                            child: Text(
-                              _badge.toString(),
-                              style: TextStyle(
+                            child: 
+                            new Container(
+                              padding: EdgeInsets.all(2),
+                              decoration: new BoxDecoration(
                                 color: Colors.white,
-                                fontSize: 8,
+                                borderRadius: BorderRadius.circular(6),
                               ),
-                              textAlign: TextAlign.center,
-                            ),
+                              child: Text(
+                                _badge.toString(),
+                                style: TextStyle(
+                                  color: widget.activeColor,
+                                  fontSize: 8,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            )
                           ),
                         ):new Container(),
                       ],
