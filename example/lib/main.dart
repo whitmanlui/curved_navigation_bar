@@ -14,31 +14,40 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        bottomNavigationBar: CurvedNavigationBar(
-          activeColor: Colors.red,
-          inactiveColor: Colors.black,
-          index: 0,
-          items:<TabData>[
-            TabData(iconData: Icons.add, title: "add", badge: 3),
-            TabData(iconData: Icons.list, title: "list", badge: 2),
-            TabData(iconData: Icons.compare_arrows, title: "compare_arrows", badge: 2),
-            TabData(iconData: Icons.call_split, title: "call_split", badge: 3),
-            TabData(iconData: Icons.perm_identity, title: "perm_identity", badge: 99),
-          ],
-          color: Colors.white,
-          buttonBackgroundColor: Colors.yellowAccent,
-          backgroundColor: Colors.blueAccent,
-          onTap: (index) {
-            setState(() {
-              _page = index;
-            });
-          },
+
+        body: Stack(
+          children: <Widget>[
+            Container(
+              color: Colors.blueAccent,
+              child: Center(
+                child: Text(_page.toString(), textScaleFactor: 10.0),
+              ),
+            ),
+            Align(
+                alignment: Alignment.bottomCenter,
+                child: CurvedNavigationBar(
+                  backgroundColor: Colors.transparent,
+                  buttonBackgroundColor: Color(0xFFBD202F),
+                  color: Color(0xFFFAFAFA),
+                  activeColor: Colors.white,
+                  inactiveColor: Color(0xFF7C7C7C),
+                  index: 0,
+                  items:<TabData>[
+                    TabData(iconData: Icons.assignment, title: "", badge: 55 ),
+                    TabData(iconData: Icons.calendar_today, title: "", badge: 80 ),
+                    TabData(iconData: Icons.home, title: "", badge: 3 ),
+                    TabData(iconData: Icons.shopping_cart, title: "", badge: 30 ),
+                    TabData(iconData: Icons.person, title: "", badge: 100 ),
+                  ],
+                  onTap: (index) {
+                    setState(() {
+                      _page = index;
+                    });
+                  },
+                ),
+            )
+          ]
         ),
-        body: Container(
-          color: Colors.blueAccent,
-          child: Center(
-            child: Text(_page.toString(), textScaleFactor: 10.0),
-          ),
-        ));
+    );
   }
 }
