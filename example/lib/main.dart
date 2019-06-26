@@ -10,9 +10,12 @@ class BottomNavBar extends StatefulWidget {
 
 class _BottomNavBarState extends State<BottomNavBar> {
   int _page = 0;
+  GlobalKey bottomNavigationKey = GlobalKey();
+
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
 
         body: Stack(
@@ -20,12 +23,16 @@ class _BottomNavBarState extends State<BottomNavBar> {
             Container(
               color: Colors.blueAccent,
               child: Center(
-                child: Text(_page.toString(), textScaleFactor: 10.0),
+                child: InkWell(child: Text("click me la"), onTap: (){
+                  final CurvedNavigationBarState fState = bottomNavigationKey.currentState;
+                  fState.setPage(2);
+                },),
               ),
             ),
             Align(
                 alignment: Alignment.bottomCenter,
                 child: CurvedNavigationBar(
+                  key: bottomNavigationKey,
                   backgroundColor: Colors.transparent,
                   buttonBackgroundColor: Color(0xFFBD202F),
                   color: Color(0xFFFAFAFA),

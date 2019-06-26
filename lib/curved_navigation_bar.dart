@@ -36,10 +36,10 @@ class CurvedNavigationBar extends StatefulWidget {
         super(key: key);
 
   @override
-  _CurvedNavigationBarState createState() => _CurvedNavigationBarState();
+  CurvedNavigationBarState createState() => CurvedNavigationBarState();
 }
 
-class _CurvedNavigationBarState extends State<CurvedNavigationBar>
+class CurvedNavigationBarState extends State<CurvedNavigationBar>
     with SingleTickerProviderStateMixin {
   double _startingPos;
   int _endingIndex = 0;
@@ -199,6 +199,23 @@ class _CurvedNavigationBarState extends State<CurvedNavigationBar>
       _endingIndex = index;
       _animationController.animateTo(newPosition,
           duration: widget.animationDuration, curve: widget.animationCurve);
+    });
+  }
+  void setPage(int index) {
+    if (widget.onTap != null) {
+      widget.onTap(index);
+    }
+    final newPosition = index / _length;
+    setState(() {
+      _startingPos = _pos;
+      _endingIndex = index;
+      _animationController.animateTo(newPosition,
+          duration: widget.animationDuration, curve: widget.animationCurve);
+    });
+  }
+  void setBadge(int badge) {
+    setState(() {
+      _badge = badge;
     });
   }
 }
