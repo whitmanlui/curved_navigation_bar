@@ -15,7 +15,7 @@ class CurvedNavigationBar extends StatefulWidget {
   final double height;
   final Color activeColor;
   final Color inactiveColor;
-
+  final double size;
   CurvedNavigationBar({
     Key key,
     @required this.items,
@@ -29,6 +29,7 @@ class CurvedNavigationBar extends StatefulWidget {
     this.height = 75.0,
     this.activeColor,
     this.inactiveColor,
+    this.size = 12.0
   })  : assert(items != null),
         assert(items.length >= 1),
         assert(0 <= index && index < items.length),
@@ -125,7 +126,7 @@ class CurvedNavigationBarState extends State<CurvedNavigationBar>
                       children: <Widget>[
                         Padding(
                           padding: const EdgeInsets.all(14.0),
-                          child: Icon(_icon, color: widget.activeColor,),
+                          child: Icon(_icon, color: widget.activeColor, size: widget.size,),
                         ),
                         _badge>0?new Positioned(
                           right: _badge > 99 ? 2 : 4,
@@ -180,7 +181,7 @@ class CurvedNavigationBarState extends State<CurvedNavigationBar>
                     position: _pos,
                     length: _length,
                     index: widget.items.indexOf(item),
-                    child: Icon(item.iconData, color: widget.inactiveColor,)
+                    child: Icon(item.iconData, color: widget.inactiveColor, size: widget.size,)
                   );
                 }).toList())),
           ),
