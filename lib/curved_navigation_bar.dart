@@ -29,7 +29,7 @@ class CurvedNavigationBar extends StatefulWidget {
     this.height = 75.0,
     this.activeColor,
     this.inactiveColor,
-    this.size = 12.0
+    this.size = 20.0
   })  : assert(items != null),
         assert(items.length >= 1),
         assert(0 <= index && index < items.length),
@@ -181,7 +181,37 @@ class CurvedNavigationBarState extends State<CurvedNavigationBar>
                     position: _pos,
                     length: _length,
                     index: widget.items.indexOf(item),
-                    child: Icon(item.iconData, color: widget.inactiveColor, size: widget.size,)
+                    child: new Stack(
+                      alignment: Alignment.bottomCenter,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(14.0),
+                          child: Icon(item.iconData, color: widget.inactiveColor, size: widget.size,)
+                        ),
+                        item.badge>0?new Positioned(
+                          right: item.badge > 99 ? 18 : 20,
+                          top: 34,
+                          child:  new Container(
+                            padding: EdgeInsets.all(1),
+                            decoration: BoxDecoration(
+                              borderRadius: new BorderRadius.circular(25.0),
+                              border: Border.all(color: widget.buttonBackgroundColor, width: 2),
+                              color: Colors.white,
+                            ),
+                            constraints: BoxConstraints(minWidth: 18, minHeight: 18,),
+                            child: Text(
+                              item.badge > 99 ? "99+" : item.badge.toString(),
+                              style: TextStyle(
+                                color: widget.buttonBackgroundColor,
+                                fontSize: 10,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ):new Container(),
+                      ],
+                    ),
+                    
                   );
                 }).toList())),
           ),
