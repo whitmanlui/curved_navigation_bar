@@ -190,7 +190,7 @@ class CurvedNavigationBarState extends State<CurvedNavigationBar>
                         ),
                         item.badge>0?new Positioned(
                           right: item.badge > 99 ? 16 : 18,
-                          top: 30,
+                          top: 26,
                           child:  new Container(
                             padding: EdgeInsets.all(1),
                             decoration: BoxDecoration(
