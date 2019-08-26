@@ -189,8 +189,8 @@ class CurvedNavigationBarState extends State<CurvedNavigationBar>
                           child: Icon(item.iconData, color: widget.inactiveColor, size: widget.size,)
                         ),
                         item.badge>0?new Positioned(
-                          right: item.badge > 99 ? 18 : 20,
-                          top: 34,
+                          right: item.badge > 99 ? 16 : 18,
+                          top: 30,
                           child:  new Container(
                             padding: EdgeInsets.all(1),
                             decoration: BoxDecoration(
