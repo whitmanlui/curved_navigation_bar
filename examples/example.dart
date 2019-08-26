@@ -17,12 +17,12 @@ class _BottomNavBarState extends State<BottomNavBar> {
         bottomNavigationBar: CurvedNavigationBar(
           index: 0,
           height: 75.0,
-          items: <Widget>[
-            Icon(Icons.add, size: 30),
-            Icon(Icons.list, size: 30),
-            Icon(Icons.compare_arrows, size: 30),
-            Icon(Icons.call_split, size: 30),
-            Icon(Icons.perm_identity, size: 30),
+          items: <TabData>[
+            TabData(iconData: Icons.add, title: "Article_tab", badge: 20 ),
+            TabData(iconData: Icons.list, title: "journey_tab", badge: 0),
+            TabData(iconData: Icons.compare_arrows, title: "tour_tab", badge: 110 ),
+            TabData(iconData: Icons.call_split, title: "cart_tab", badge: 32),
+            TabData(iconData: Icons.perm_identity, title: "me_tab", badge: 3),
           ],
           color: Colors.white,
           buttonBackgroundColor: Colors.white,

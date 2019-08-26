@@ -11,7 +11,7 @@ class BottomNavBar extends StatefulWidget {
 class _BottomNavBarState extends State<BottomNavBar> {
   int _page = 0;
   GlobalKey bottomNavigationKey = GlobalKey();
-
+  int a = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +24,12 @@ class _BottomNavBarState extends State<BottomNavBar> {
               color: Colors.blueAccent,
               child: Center(
                 child: InkWell(child: Text("click me la"), onTap: (){
-                  final CurvedNavigationBarState fState = bottomNavigationKey.currentState;
-                  fState.setPage(2);
+                  /* final CurvedNavigationBarState fState = bottomNavigationKey.currentState;
+                  fState.setPage(2); */
+                  setState(() {
+                    a = a +1;
+                  });
+                  print(a);
                 },),
               ),
             ),
@@ -44,7 +48,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                     TabData(iconData: Icons.calendar_today, title: "", badge: 80 ),
                     TabData(iconData: Icons.home, title: "", badge: 3 ),
                     TabData(iconData: Icons.shopping_cart, title: "", badge: 30 ),
-                    TabData(iconData: Icons.person, title: "", badge: 100 ),
+                    TabData(iconData: Icons.person, title: "", badge: a ),
                   ],
                   onTap: (index) {
                     setState(() {

@@ -195,14 +195,14 @@ class CurvedNavigationBarState extends State<CurvedNavigationBar>
                             padding: EdgeInsets.all(1),
                             decoration: BoxDecoration(
                               borderRadius: new BorderRadius.circular(25.0),
-                              border: Border.all(color: widget.buttonBackgroundColor, width: 2),
-                              color: Colors.white,
+                              //border: Border.all(color: widget.color, width: 2),
+                              color: widget.buttonBackgroundColor,
                             ),
                             constraints: BoxConstraints(minWidth: 18, minHeight: 18,),
                             child: Text(
                               item.badge > 99 ? "99+" : item.badge.toString(),
                               style: TextStyle(
-                                color: widget.buttonBackgroundColor,
+                                color: Colors.white,
                                 fontSize: 10,
                               ),
                               textAlign: TextAlign.center,
