@@ -16,6 +16,7 @@ class CurvedNavigationBar extends StatefulWidget {
   final Color activeColor;
   final Color inactiveColor;
   final double size;
+  final Color badgeColor;
   CurvedNavigationBar({
     Key key,
     @required this.items,
@@ -29,7 +30,8 @@ class CurvedNavigationBar extends StatefulWidget {
     this.height = 75.0,
     this.activeColor,
     this.inactiveColor,
-    this.size = 20.0
+    this.size = 20.0,
+    this.badgeColor
   })  : assert(items != null),
         assert(items.length >= 1),
         assert(0 <= index && index < items.length),
@@ -136,13 +138,13 @@ class CurvedNavigationBarState extends State<CurvedNavigationBar>
                             decoration: BoxDecoration(
                               borderRadius: new BorderRadius.circular(25.0),
                               border: Border.all(color: widget.buttonBackgroundColor, width: 2),
-                              color: Colors.white,
+                              color: widget.badgeColor
                             ),
                             constraints: BoxConstraints(minWidth: 18, minHeight: 18,),
                             child: Text(
                               _badge > 99 ? "99+" : _badge.toString(),
                               style: TextStyle(
-                                color: widget.buttonBackgroundColor,
+                                color: Colors.white,
                                 fontSize: 10,
                               ),
                               textAlign: TextAlign.center,
@@ -189,14 +191,14 @@ class CurvedNavigationBarState extends State<CurvedNavigationBar>
                           child: Icon(item.iconData, color: widget.inactiveColor, size: widget.size,)
                         ),
                         item.badge>0?new Positioned(
-                          right: item.badge > 99 ? 14 : 16,
-                          top: 26,
+                          right: item.badge > 99 ? 10 : 12,
+                          top: 24,
                           child:  new Container(
                             padding: EdgeInsets.all(1),
                             decoration: BoxDecoration(
                               borderRadius: new BorderRadius.circular(25.0),
                               //border: Border.all(color: widget.color, width: 2),
-                              color: widget.buttonBackgroundColor,
+                              color: widget.badgeColor,
                             ),
                             constraints: BoxConstraints(minWidth: 18, minHeight: 18,),
                             child: Text(
